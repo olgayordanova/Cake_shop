@@ -25,7 +25,8 @@
 
 {% block content %}
     <h1 class="text-center">Cake Detail</h1>
-    {% if not request.user.is_authotication %}
+
+    {% if not request.user.is_authenticated %}
          <h3 class="text-center">Please sign in! </h3>
     {% endif %}
     <div class="d-flex p-3">
@@ -41,7 +42,7 @@
         <h6 class="card-title">Discount: {{ cake.discount }}</h6>
 {#        <a class="btn btn-primary" href="{% url 'order' cake.id %}">Buy</a>#}
 {#        <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a>#}
-        {% if request.user.is_authotication %}
+        {% if request.user.is_authenticated %}
             <input type="submit" value="Buy" class="btn btn-primary">
         {% endif %}
     </div>
