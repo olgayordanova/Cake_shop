@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from cake_shop_app.core.decorators import any_group_required
 from cake_shop_app.forms import ProductCreateForm
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from cake_shop_app.models import Product
 
 from cake_shop_app.models import Product
@@ -52,4 +52,9 @@ class ProductUpdateView(AnyGroupRequiredMixin, UpdateView):
     model = Product
     fields = '__all__'
     context_object_name = "cake"
+    success_url = reverse_lazy('index')
+
+class ProductDeleteView(AnyGroupRequiredMixin, DeleteView):
+    template_name = 'delete.html'
+    model = Product
     success_url = reverse_lazy('index')
