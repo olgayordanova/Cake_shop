@@ -1,0 +1,40 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    <h1 class="text-center">Update Cake</h1>
+
+
+    <form class="col-lg-6 offset-lg-3"
+          method="post"
+          enctype="multipart/form-data">
+{#          action="{% url 'edit' cake.id %}">#}
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            {{ form.description }}
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            {{ form.type }}
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            {{ form.price }}
+        </div>
+        <div class="form-group">
+            <label for="discount">Discount</label>
+            {{ form.discount }}
+        </div>
+        <div class="form-group">
+            <label for="product_image">Image</label>
+            {{ form.product_image }}
+        </div>
+        {{ form.errors }}
+        {{ form.image }}
+
+        <input type="submit" value="Update" class="btn btn-primary">
+</form>
+{% endblock %}

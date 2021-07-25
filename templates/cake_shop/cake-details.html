@@ -1,0 +1,17 @@
+<div class="card m-3" style="width: 18rem;">
+    <img class="card-img-top" src="{{ cake.product_image.url }}" alt="Card image cap">
+    <div class="card-body">
+        <h6 class="card-title">{{ cake.name }}</h6>
+        <h6 class="card-title">{{ cake.type }}</h6>
+{#        <p class="card-text">{{ cake.description }}</p>#}
+{#        <h5 class="card-title">{{ cake.price }}</h5>#}
+
+        <a class="btn btn-primary" href="{% url 'product' cake.id %}">Buy</a>
+        {% if request.user.is_staff %}
+            <a class="btn btn-primary" href="{% url 'edit' cake.id %}">Update</a>
+        {% endif %}
+
+
+
+    </div>
+</div>

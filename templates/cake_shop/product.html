@@ -1,0 +1,72 @@
+{#{% extends 'common/base.html' %}#}
+{#{% block content %}#}
+{#    <h1 class="text-center">Cake Detail</h1>#}
+{#    <div class="d-flex p-3">#}
+{##}
+{#<div class="card m-3" style="width: 18rem;">#}
+{#    <img class="card-img-top" src="{{ cake.product_image.url }}" alt="Card image cap">#}
+{#    <div class="card-body">#}
+{#        <h5 class="card-title">{{ cake.name }}</h5>#}
+{#        <h5 class="card-title">{{ cake.type }}</h5>#}
+{#        <p class="card-text">{{ cake.description }}</p>#}
+{#        <h5 class="card-title">{{ cake.price }}</h5>#}
+{##}
+{#        <input type="submit" value="Buy" class="btn btn-primary">#}
+{##}
+{#    </div>#}
+{#</div>#}
+{##}
+{##}
+{#    </div>#}
+{#{% endblock %}#}
+
+
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <h1 class="text-center">Cake Detail</h1>
+    {% if not request.user.is_authotication %}
+         <h3 class="text-center">Please sign in! </h3>
+    {% endif %}
+    <div class="d-flex p-3">
+
+
+    <div class="card m-3" style="width: 18rem;">
+    <img class="card-img-top" src="{{ cake.product_image.url }}" alt="Card image cap">
+    <div class="card-body">
+        <h3 class="card-title">Title: {{ cake.name }}</h3>
+        <h6 class="card-title">Type: {{ cake.type }}</h6>
+        <p class="card-text">Description: {{ cake.description }}</p>
+        <h6 class="card-title">Price: {{ cake.price }}</h6>
+        <h6 class="card-title">Discount: {{ cake.discount }}</h6>
+{#        <a class="btn btn-primary" href="{% url 'order' cake.id %}">Buy</a>#}
+{#        <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a>#}
+        {% if request.user.is_authotication %}
+            <input type="submit" value="Buy" class="btn btn-primary">
+        {% endif %}
+    </div>
+</div>
+
+
+{#    <img class="card-img-top" src="{{ cake.product_image.url }}" alt="Card image cap">#}
+{#    <h5 class="card-title">{{ cake.name }}</h5>#}
+{#    <h5 class="card-title">{{ cake.type }}</h5>#}
+{#    <p class="card-text">{{ cake.description }}</p>#}
+{#    <h5 class="card-title">{{ cake.price }}</h5>#}
+{##}
+{#    <input type="submit" value="Buy" class="btn btn-primary">#}
+ </div>
+{% endblock %}
+
+<div class="card m-3" style="width: 18rem;">
+    <img class="card-img-top" src="{{ cake.product_image.url }}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{ cake.name }}</h5>
+        <h5 class="card-title">{{ cake.type }}</h5>
+        <p class="card-text">{{ cake.description }}</p>
+        <h5 class="card-title">{{ cake.price }}</h5>
+        <a class="btn btn-primary" href="{% url 'product' cake.id %}">Buy</a>
+{#        <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a>#}
+{#        <input type="submit" value="Details" class="btn btn-primary">#}
+    </div>
+</div>

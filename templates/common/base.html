@@ -1,0 +1,27 @@
+{% load static %}
+{% load profile_complete_notification %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pythons Wiki</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+
+
+
+
+
+</head>
+<body>
+
+{% include 'common/header.html' %}
+
+{% profile_complete_notification %}
+
+{% block content %}
+{% endblock %}
+
+{% include 'common/footer.html' %}
+</body>
+</html>
