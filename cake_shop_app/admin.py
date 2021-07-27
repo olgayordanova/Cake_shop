@@ -2,27 +2,23 @@ from django.contrib import admin
 
 # Register your models here.
 
-from cake_shop_app.models import Product, OrderProduct, Order
+from cake_shop_app.models import Product, OrderItem, Order
 
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'description', 'price')
     list_filter = ('type', )
 
-class OrderProductAdmin ( admin.ModelAdmin ):
-    list_display = ('user', 'product', 'quantity', 'ordered')
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'date_ordered', 'complete')
     list_filter = ('user',)
 
-class OrderAdmin ( admin.ModelAdmin ):
-    list_display = ('user', 'ordered')
-    list_filter = ('user',)
-
-    # def likes_count(self, obj):
-    #     return obj.like_set.count()
-
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('item', 'quantity')
+    list_filter = ('item',)
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(OrderProduct, OrderProductAdmin)
+admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Order, OrderAdmin)
 
 

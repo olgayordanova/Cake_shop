@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
-# Create your models here.
 from cake_shop import settings
 
 
@@ -41,32 +40,59 @@ class Product(models.Model):
             "pk": self.pk
         } )
 
-class OrderProduct ( models.Model ):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    ordered = models.BooleanField(default = False)
+class OrderItem(models.Model):
+    item = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    quantity = models.IntegerField(default=1, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.quantity} of {self.product.name}"
+        return f"{self.quantity} of {self.item.name}"
 
+    def get_total_item_price(self):
+        return self.quantity * self.item.price
 
-class Order(models.Model) :
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    products = models.ManyToManyField(OrderProduct)
-    start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
+    def get_discount_item_price(self):
+        return self.quantity * self.item.discount
+
+    def get_amount_saved(self):
+        return self.get_total_item_price() - self.get_discount_item_price()
+
+    def get_final_price(self):
+        if self.item.discount:
+            return self.get_discount_item_price()
+        return self.get_total_item_price()
+
+    # @property
+    # def get_total(self):
+    #     total = self.product.price * self.quantity
+    #     return total
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True )
+    items = models.ManyToManyField(OrderItem)
+    date_ordered = models.DateTimeField(auto_now_add=True)
+    complete = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.name
+        return str(self.id)
 
-# Дата
-# Номер
-# Клиент номер - външен ключ клиенти връзка 1:много
-# Продукт номер - външен ключ продукти връзка 1:много
-# Цена
-# Отстъпка
-# Количество
-# Статус - изпълнена/неизпълнена
+    def get_total_price(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()
+        return total
+
+    # @property
+    # def get_cart_total(self):
+    #     orderitems = self.orderitem_set.all()
+    #     total = sum([item.get_total for item in orderitems])
+    #     return total
+    #
+    # @property
+    # def get_cart_items(self):
+    #     orderitems = self.orderitem_set.all()
+    #     total = sum([item.quantity for item in orderitems])
+    #     return total
+
+
