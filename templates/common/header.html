@@ -1,3 +1,4 @@
+{#{% load cart_template_tags %}#}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-brand">Cake Shop</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -9,10 +10,23 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
-{#            {{ if user. }}#}
+            {% if request.user.is_staff %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'create' %}">Add new cake</a>
             </li>
+
+{#            <li class="nav-item">#}
+{#                {% cart_template_tags %}#}
+{#                <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">#}
+{#                {% if request.user|cart_item_count != 0 %}#}
+{#                    <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>#}
+{#                {% endif %}#}
+{#                <i class="fas fa-shopping-cart"></i>#}
+{#                <span class="clearfix d-none d-sm-inline-block"> Cart </span>#}
+{#                </a>#}
+{#            </li>#}
+
+            {% endif %}
         </ul>
     </div>
     <div>

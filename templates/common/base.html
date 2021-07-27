@@ -1,15 +1,16 @@
 {% load static %}
 {% load profile_complete_notification %}
+{#{% load cart_template_tags %}#}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pythons Wiki</title>
+    <title>Dream cakes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css\style.css' %}">
-
-
-
+    <link rel="stylesheet" href="{% static 'css\cart.css' %}">
+    <meta name="java-script" href="{% static 'js\cart.js' %}">
+{#     <link rel="icon" type="image/png" href="https://icon-library.com/images/web-home-icon/web-home-icon-0.jpg">#}
 
 
 </head>
@@ -18,7 +19,7 @@
 {% include 'common/header.html' %}
 
 {% profile_complete_notification %}
-
+{#{% load cart_template_tags %}#}
 {% block content %}
 {% endblock %}
 
