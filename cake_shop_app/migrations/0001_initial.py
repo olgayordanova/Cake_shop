@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
                 ('type', models.CharField(choices=[('cake', 'Cake'), ('buscuit', 'Buscuit')], max_length=10)),
                 ('description', models.TextField()),
                 ('price', models.FloatField()),
-                ('image', models.ImageField(upload_to='images')),
+                ('discount', models.FloatField(blank=True, null=True)),
+                ('product_image', models.ImageField(upload_to='images')),
             ],
         ),
     ]
