@@ -1,0 +1,37 @@
+{% extends 'common/base_order.html' %}
+{% block content %}
+    <div class="source-details-section">
+        <div class="source-details-container container">
+            <h2>Source: {{ item.name }}</h2>
+            <ol>
+                {% for order in page_obj.object_list %}
+                    <div class="article-card">
+                        <h3 class="article-title small">{{ order.id }} {{  order.user.first_name }}</h3>
+{#                        <img class="article-image large"#}
+{#                             src="{{ article.image_url }}">#}
+                        <p>{{ order.date_ordered }}</p>
+                        <span class="source">{{ item.product.name }}</span>
+                    </div>
+                {% endfor %}
+            </ol>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}">prev</a>
+                    {% else %}
+                        <a href="/" style="pointer-events: none">Prev</a>
+                    {% endif %}
+                    <span class="current">
+                        {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    {% else %}
+                        <a href="" style="pointer-events: none">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

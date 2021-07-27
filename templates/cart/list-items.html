@@ -1,0 +1,20 @@
+
+{% extends 'common/base_order.html' %}
+{% block content %}
+
+    <div class="source-list-section">
+        <div class="source-list-container container">
+            <h2>All Items</h2>
+
+            {% for item in orderitem_list_list %}
+                <div class="source-item-card">
+                    <h3>{{ item.product.name }}</h3>
+                    <a href="{% url 'details item' item.id %}">See related order</a>
+                    <p>Link: <a href="{{ item.url }}" target="_blank">{{ item.product.name }}</a></p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
