@@ -24,21 +24,21 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse ( "core:product", kwargs={
-            "pk": self.pk
-
-        } )
-
-    def get_add_to_cart_url(self):
-        return reverse ( "core:add-to-cart", kwargs={
-            "pk": self.pk
-        } )
-
-    def get_remove_from_cart_url(self):
-        return reverse ( "core:remove-from-cart", kwargs={
-            "pk": self.pk
-        } )
+    # def get_absolute_url(self):
+    #     return reverse ( "core:product", kwargs={
+    #         "pk": self.pk
+    #
+    #     } )
+    #
+    # def get_add_to_cart_url(self):
+    #     return reverse ( "core:add-to-cart", kwargs={
+    #         "pk": self.pk
+    #     } )
+    #
+    # def get_remove_from_cart_url(self):
+    #     return reverse ( "core:remove-from-cart", kwargs={
+    #         "pk": self.pk
+    #     } )
 
 class OrderItem(models.Model):
     item = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -53,20 +53,13 @@ class OrderItem(models.Model):
         return self.quantity * self.item.price
 
     def get_discount_item_price(self):
-        return self.quantity * self.item.discount
-
-    def get_amount_saved(self):
-        return self.get_total_item_price() - self.get_discount_item_price()
+        return self.quantity * self.item.price*(1-self.item.discount)
 
     def get_final_price(self):
         if self.item.discount:
             return self.get_discount_item_price()
         return self.get_total_item_price()
 
-    # @property
-    # def get_total(self):
-    #     total = self.product.price * self.quantity
-    #     return total
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True )
@@ -83,16 +76,5 @@ class Order(models.Model):
             total += order_item.get_final_price()
         return total
 
-    # @property
-    # def get_cart_total(self):
-    #     orderitems = self.orderitem_set.all()
-    #     total = sum([item.get_total for item in orderitems])
-    #     return total
-    #
-    # @property
-    # def get_cart_items(self):
-    #     orderitems = self.orderitem_set.all()
-    #     total = sum([item.quantity for item in orderitems])
-    #     return total
 
 

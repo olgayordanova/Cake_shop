@@ -14,8 +14,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('user',)
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('item', 'quantity')
-    list_filter = ('item',)
+    list_display = ('item', 'user', 'quantity')
+    list_filter = ('user',)
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)

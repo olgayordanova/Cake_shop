@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
-from .views import OrderCreateView, OrderItemCreateView, OrderItemListView, OrderItemDetailView, OrderListView, \
-    add_to_cart
+from .views import OrderItemListView, OrderItemDetailView, OrderListView, \
+    add_to_cart, OrderSummaryView, complete_order, about_us
 
 urlpatterns = [
     path ( '', views.IndexView.as_view (), name="index" ),
@@ -9,11 +9,12 @@ urlpatterns = [
     path ( 'edit/<int:pk>/', views.ProductUpdateView.as_view (), name="edit" ),
     path ( 'delete/<int:pk>/', views.ProductDeleteView.as_view(), name="delete"),
     path ( 'details/<int:pk>/', views.ProductView.as_view (), name="product" ),
-
     path('cart/<int:pk>/', add_to_cart, name='cart'),
-    path('orders/create/', OrderCreateView.as_view(), name='create order'),
+    path('cart/complete/', complete_order, name='order complete'),
+    path('order-summary/', OrderSummaryView.as_view(), name='order summary'),
     path('items/', OrderItemListView.as_view(), name='list items'),
     path('items/<int:pk>', OrderItemDetailView.as_view(), name='details item'),
-    path('items/create/', OrderItemCreateView.as_view(), name='create item'),
+    path('about/', about_us, name='about us'),
+
 
 ]
