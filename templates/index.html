@@ -1,9 +1,33 @@
+
 {% extends 'common/base.html' %}
+
 {% block content %}
+    {% load static %}
+    <p>
+
+    </p>
+{#    <img src="{% static 'images/home_cake.jpg' %}" id="front-logo-img" style="width: 30%;">#}
     <h1 class="text-center">All Cakes</h1>
     <div class="d-flex p-3">
         {% for cake in cakes %}
             {% include  'cake_shop/cake-details.html' with cake=cake %}
         {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">prev</a>
+            {% else %}
+                <a href="/" style="pointer-events: none">Prev</a>
+            {% endif %}
+            <span class="current">
+                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% else %}
+                <a href="" style="pointer-events: none">next</a>
+            {% endif %}
+        </span>
     </div>
 {% endblock %}
