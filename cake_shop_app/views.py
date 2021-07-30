@@ -1,23 +1,15 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-import json
-
 from django.utils import timezone
 from django.views import View
 from django.views.generic.detail import SingleObjectMixin
-from django.contrib.auth import mixins as auth_mixins
 from cake_shop_app.core.mixins import AnyGroupRequiredMixin
 from django.urls import reverse_lazy, reverse
-# from cake_shop_app.core.decorators import any_group_required
-# from cake_shop_app.forms import ProductCreateForm
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
-
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from cake_shop_app.models import Product, Order, OrderItem
-from cake_shop_auth.models import CakeShopUser
 
 
 class IndexView ( ListView ):
@@ -65,8 +57,18 @@ class ProductDeleteView ( AnyGroupRequiredMixin, DeleteView ):
     template_name = 'delete.html'
     model = Product
     success_url = reverse_lazy ( 'index' )
-#     Ако има пуснати поръчки да не може да се изтрива продукта от администраторите
 
+    def delete(self, request, *args, **kwargs):
+        item = self.get_object()
+        order_qs = Order.objects.all ().exclude(complete=True)
+        for order in order_qs:
+            if item.id == order.items.values('item_id').first()['item_id']:
+                messages.warning(request, "The product is in active order! You cannot delete it")
+                return redirect("index")
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        item.delete()
+        return HttpResponseRedirect(success_url)
 
 def add_to_cart(request, pk):
     item = get_object_or_404(Product, pk=pk)
@@ -82,21 +84,18 @@ def add_to_cart(request, pk):
         if order.items.filter(item__pk=item.pk).exists():
             order_item.quantity += 1
             order_item.save()
-            messages.info(request, "Added quantity Item")
+            messages.success(request, "Added quantity Item")
             return redirect("index")
         else:
             order.items.add(order_item)
-            messages.info(request, "Item added to your cart")
+            messages.success(request, "Item added to your cart")
             return redirect("index")
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(user=request.user, date_ordered=ordered_date)
         order.items.add(order_item)
-        messages.info(request, "Item added to your cart")
+        messages.success(request, "Item added to your cart")
         return redirect("index")
-
-def view_cart():
-    pass
 
 class OrderListView(ListView):
     model = Order
@@ -144,60 +143,8 @@ def complete_order(request):
     order_to_complete = get_object_or_404(Order, pk=order[0].id)
     order_to_complete.complete = True
     order_to_complete.save()
+    messages.success(request, "Your order has been accepted. We will contact you for details ")
     return redirect("index")
 
 def about_us(request):
     return render(request, 'common/about_us.html')
-# class OrderSummaryFormView(LoginRequiredMixin, FormView):
-#     template_name = 'cart/cart.html'
-#     # form_class = RegistrationForm
-#
-#     def get(self, *args, **kwargs):
-#
-#         try:
-#             order = Order.objects.get(user=self.request.user, complete=False)
-#             context = {
-#                 'object': order
-#             }
-#             return render(self.request, 'cart/cart.html', context)
-#         except ObjectDoesNotExist:
-#             messages.error(self.request, "You do not have an order")
-#             return redirect("index")
-
-# from myapp.forms import ContactForm
-# from django.views.generic.edit import FormView
-
-# class ContactFormView(FormView):
-#     template_name = 'contact.html'
-#     form_class = ContactForm
-#     success_url = '/thanks/'
-#
-#     def form_valid(self, form):
-#         # This method is called when valid form data has been POSTed.
-#         # It should return an HttpResponse.
-#         form.send_email()
-#         return super().form_valid(form)
-#
-#
-#
-# class OrderCreateView(CreateView):
-# #     model = Order
-# #     template_name = 'cart/create-order.html'
-# #     fields = '__all__'
-# #     object = None
-# #
-# #     def get_success_url(self):
-# #         return reverse ('create item', kwargs={
-# #             'pk':self.object.id
-# #         })
-# #
-# #
-# # class OrderItemCreateView(CreateView):
-# #     model = OrderItem
-# #     template_name = 'cart/create-item.html'
-# #     fields = '__all__'
-# #
-# #     def get_success_url(self):
-# #         return reverse ('details item', kwargs={
-# #             'pk':self.object.id
-# #         })

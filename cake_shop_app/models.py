@@ -1,7 +1,4 @@
 from django.db import models
-from django.urls import reverse
-from django.utils.datetime_safe import datetime
-
 from cake_shop import settings
 
 
@@ -23,22 +20,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-    # def get_absolute_url(self):
-    #     return reverse ( "core:product", kwargs={
-    #         "pk": self.pk
-    #
-    #     } )
-    #
-    # def get_add_to_cart_url(self):
-    #     return reverse ( "core:add-to-cart", kwargs={
-    #         "pk": self.pk
-    #     } )
-    #
-    # def get_remove_from_cart_url(self):
-    #     return reverse ( "core:remove-from-cart", kwargs={
-    #         "pk": self.pk
-    #     } )
 
 class OrderItem(models.Model):
     item = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
