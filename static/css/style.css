@@ -264,3 +264,71 @@ footer div {
     text-align: center;
     color: ghostwhite;
 }
+
+/*   */
+
+.nav ul li, nav ul li a {
+    font-size: 18px;
+    margin-top: 0px;
+}
+
+nav ul li a:hover {
+    text-decoration: none;
+    color: #aaaaaa;
+}
+
+
+.nav-account span {
+    font-size: 18px;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.form-sign-in {
+    width: 30%;
+    margin: 50px auto;
+    border: 3px solid #ccc;
+    padding: 30px;
+}
+
+
+.form-sign-in input[type=text] {
+    width: 100%;
+    padding: 0;
+    border: 2px solid #ccc;
+}
+
+
+.form-sign-in input[type=password] {
+    width: 100%;
+    padding: 0;
+    border: 2px solid #ccc;
+}
+
+.form-sign-in button{
+    margin-top: 20px;
+}
+
+
+
+
+.form-sign-in input[type=email] {
+    width: 100%;
+    padding: 0;
+    border: 2px solid #ccc;
+}
+
+.helptext {
+    font-size: 13px;
+    color: #ccc;
+    width: 100%;
+    display: block;
+
+}
+
+label {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
