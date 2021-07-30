@@ -8,6 +8,15 @@
     </p>
 {#    <img src="{% static 'images/home_cake.jpg' %}" id="front-logo-img" style="width: 30%;">#}
     <h1 class="text-center">All Cakes</h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="d-flex p-3">
         {% for cake in cakes %}
             {% include  'cake_shop/cake-details.html' with cake=cake %}
