@@ -1,5 +1,6 @@
 from django.db import models
 from cake_shop import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Product(models.Model):
@@ -14,8 +15,8 @@ class Product(models.Model):
     name = models.CharField(max_length=25,)
     type = models.CharField(max_length=10, choices=TYPE_CHOICES,)
     description = models.TextField()
-    price = models.FloatField()
-    discount = models.FloatField ( blank=True, null=True )
+    price = models.FloatField(validators=(MinValueValidator (0.0),))
+    discount = models.FloatField ( blank=True, null=True , validators=(MinValueValidator (0.0), MaxValueValidator(1.0)))
     product_image = models.ImageField( upload_to='images',)
 
     def __str__(self):
@@ -24,7 +25,7 @@ class Product(models.Model):
 class OrderItem(models.Model):
     item = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    quantity = models.IntegerField(default=1, null=True, blank=True)
+    quantity = models.PositiveIntegerField(default=1, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

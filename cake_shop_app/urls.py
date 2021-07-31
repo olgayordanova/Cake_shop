@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
-from .views import OrderItemListView, OrderItemDetailView, OrderListView, \
-    add_to_cart, OrderSummaryView, complete_order, about_us
+from .views import OrderItemListView, OrderItemDetailView, OrderSummaryView, add_to_cart,  complete_order, about_us
 
 urlpatterns = [
     path ( '', views.IndexView.as_view (), name="index" ),

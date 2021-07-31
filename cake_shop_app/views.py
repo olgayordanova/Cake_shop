@@ -97,9 +97,9 @@ def add_to_cart(request, pk):
         messages.success(request, "Item added to your cart")
         return redirect("index")
 
-class OrderListView(ListView):
-    model = Order
-    template_name = 'cart/list-orders.html'
+# class OrderListView(ListView):
+#     model = Order
+#     template_name = 'cart/list-orders.html'
 
 class OrderItemDetailView(SingleObjectMixin,ListView ):
     model = OrderItem
