@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 
 UserModel = get_user_model()
 @admin.register(UserModel)
-class PetstagramUserAdmin(UserAdmin):
+class CakeUserAdmin(UserAdmin):
     list_display = ('email', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'groups')
     ordering = ('email',)
