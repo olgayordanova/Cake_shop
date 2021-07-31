@@ -14,14 +14,14 @@ class IndexTests(TestCase):
         posts = response.context['cakes']
 
 
-class ProductDeleteViewTests(TestCase):
-    @patch('cake_shop_app.models.Product.objects')
-    def test_delete_product(self,delete_mock):
-        delete_mock.all.return_value = [1]
-        client = Client()
-        response = client.get(reverse('delete'), )
-        self.assertTemplateUsed(response, 'delete.html')
-        posts = response.context['cakes']
+# class ProductDeleteViewTests(TestCase):
+#     @patch('cake_shop_app.models.Product.objects')
+#     def test_delete_product(self,delete_mock):
+#         delete_mock.all.return_value = [1]
+#         client = Client()
+#         response = client.get(reverse('delete'), )
+#         self.assertTemplateUsed(response, 'delete.html')
+#         posts = response.context['cakes']
 
 # class IndexTests(TestCase):
 #     @patch('cake_shop.cake_shop_app.models.Order.object')
