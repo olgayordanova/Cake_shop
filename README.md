@@ -67,8 +67,6 @@ ProductCreateView ( AnyGroupRequiredMixin, CreateView )
 ProductUpdateView ( AnyGroupRequiredMixin, UpdateView )
 ProductDeleteView ( AnyGroupRequiredMixin, DeleteView )
 OrderSummaryView(LoginRequiredMixin, View):
-OrderItemListView(ListView)
-OrderItemDetailView(SingleObjectMixin,ListView )
 
 Класът AnyGroupRequiredMixin дава възможност да се дефинират правата на отделните потребители и групи, които работят със съответният клас наследник. ProductCreateView, ProductUpdateView и ProductDeleteView се достъпват само от потребители с права на служител и съответно от администратора. В ProductDeleteView са разписани допълнителни рестрикции, касаещи всички – продукта не може да бъде изтриван, ако има активна поръчка в която той присъства. 
 
@@ -82,7 +80,7 @@ complete_order – Променя статуса на поръчката в comp
 
 Приложението има внедрена система за Error Handling, където е необходимо. Чрез django.contrib messages приложението информира потребителя по отношение на действията, които е извършил. 
 
-Функцията about_us насочва потребителя към страница с информация за производителя.
+Функциите about_us и contacts насочват потребителя към страница с информация за производителя, както и към страница с контактите.
 
 ### URL’s: 
 В URL’s са описани пътищата към всички описани по-горе View’s. 
