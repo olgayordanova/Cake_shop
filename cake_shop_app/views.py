@@ -19,7 +19,7 @@ class IndexView ( ListView ):
     paginate_by = 5
 
 # @login_required(login_url=reverse_lazy('sign in'))
-# @any_group_required(groups=['User']) #'Staff'
+# @any_group_required(groups=['User'])
 # def create(request):
 #     if request.method == 'GET':
 #         form = ProductCreateForm()
@@ -97,33 +97,6 @@ def add_to_cart(request, pk):
         messages.success(request, "Item added to your cart")
         return redirect("index")
 
-# class OrderListView(ListView):
-#     model = Order
-#     template_name = 'cart/list-orders.html'
-
-class OrderItemDetailView(SingleObjectMixin,ListView ):
-    model = OrderItem
-    template_name = 'cart/details-item.html'
-    object = None
-    # paginate_by = 3
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=OrderItem.objects.all())
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['item'] = self.object
-        return context
-
-    def get_queryset(self):
-        return self.object.order_set.all()
-
-class OrderItemListView(ListView):
-    model = OrderItem
-    template_name = 'cart/list-items.html'
-
-
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
 
@@ -148,3 +121,6 @@ def complete_order(request):
 
 def about_us(request):
     return render(request, 'common/about_us.html')
+
+def contacts(request):
+    return render(request, 'common/contacts.html')
