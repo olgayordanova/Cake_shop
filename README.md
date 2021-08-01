@@ -61,6 +61,7 @@ Templates: Организирани са няколко темплейта, ко
 
 ### Views: 
 Използвани са основно Class Base View’s, даващи различна функционалност на приложението. В част от тях са пренаписани някой от стандартните методи на класа родител, съобразно спецификите на приложението:
+
 IndexView ( ListView )
 ProductView ( DetailView )
 ProductCreateView ( AnyGroupRequiredMixin, CreateView )
