@@ -1,13 +1,10 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render
-
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
-
 from cake_shop_auth.forms import SignInForm, SignUpForm
-
 
 UserModel = get_user_model()
 
@@ -24,6 +21,11 @@ class SignInView(LoginView):
 
     def get_success_url(self):
         return reverse('index')
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('index')
 
 # -----------------
 # def sign_up(request):
@@ -59,6 +61,3 @@ class SignInView(LoginView):
 #     return render(request, 'auth/sign-in.html', context)
 #---------------------------------------
 
-def sign_out(request):
-    logout(request)
-    return redirect('index')
