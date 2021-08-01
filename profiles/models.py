@@ -1,9 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-# Create your models here.
-UserModel = get_user_model()
 
+UserModel = get_user_model()
 
 class Profile(models.Model):
     first_name = models.CharField(
@@ -18,10 +17,8 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
-    profile_image = models.ImageField(
-        upload_to='profiles',
-        blank=True,
-    )
+    # profile_image = models.ImageField(upload_to='profiles', blank=True,)
+
     is_complete = models.BooleanField(
         default=False,
     )
