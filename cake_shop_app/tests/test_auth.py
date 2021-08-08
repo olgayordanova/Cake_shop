@@ -3,7 +3,6 @@ from django.test import TestCase
 from cake_shop_auth.forms import SignUpForm, SignInForm
 from cake_shop_auth.models import CakeShopUser
 
-
 class SighUpTest(TestCase):
 
     def test_whenPasswordsDoesMatch_expectNoting(self):
