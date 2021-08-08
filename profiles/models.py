@@ -13,7 +13,7 @@ class Profile(models.Model):
         max_length=20,
         blank=True,
     )
-    age = models.IntegerField(
+    age = models.PositiveIntegerField(
         blank=True,
         null=True,
     )
