@@ -45,10 +45,10 @@ class ProfileFormTest(TestCase):
 
 
 class ProductCreateFormTest(TestCase):
-    im = Image.new(mode='RGB', size=(200, 200))  # create a new image using PIL
-    im_io = BytesIO()  # a BytesIO object for saving image
-    im.save(im_io, 'JPEG')  # save the image to im_io
-    im_io.seek(0)  # seek to the beginning
+    im = Image.new(mode='RGB', size=(200, 200))
+    im_io = BytesIO()
+    im.save(im_io, 'JPEG')
+    im_io.seek(0)
     image = InMemoryUploadedFile(im_io, None, 'random-name.jpg', 'image/jpeg', len(im_io.getvalue()), None)
 
     valid_name = 'Product 1'

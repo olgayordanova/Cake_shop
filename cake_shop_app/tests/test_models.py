@@ -4,8 +4,9 @@ from django.test import TestCase
 from cake_shop_app.models import Product, OrderItem, Order
 from cake_shop_auth.models import CakeShopUser
 
-
+#coverage run --source='.' manage.py test
 # https://adamj.eu/tech/2020/01/13/make-django-tests-always-rebuild-db/
+
 from profiles.models import Profile
 
 
