@@ -124,3 +124,6 @@ def about_us(request):
 
 def contacts(request):
     return render(request, 'common/contacts.html')
+
+def home_page(request):
+    return render(request, 'home.html')

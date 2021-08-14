@@ -11,14 +11,3 @@ class ProductCreateForm(forms.ModelForm):
             'type': forms.TextInput ( attrs={'class': 'form-control'} ),
         }
         fields = '__all__'
-        # CharField(max_length=10, choices=TYPE_CHOICES,)
-
-# from django import forms
-#
-# class ContactForm(forms.Form):
-#     name = forms.CharField()
-#     message = forms.CharField(widget=forms.Textarea)
-#
-#     def send_email(self):
-#         # send email using the self.cleaned_data dictionary
-#         pass

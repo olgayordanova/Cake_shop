@@ -43,6 +43,7 @@ class OrderItem(models.Model):
         return self.get_total_item_price()
 
 
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True )
     items = models.ManyToManyField(OrderItem)
