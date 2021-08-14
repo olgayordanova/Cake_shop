@@ -1,0 +1,53 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="us">
+
+<head>
+<link href = "{% static 'images/cake@2x.png' %}" rel="icon" type="image/gif">
+{#<link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>#}
+<meta charset="utf-8">
+<title>Olya style cakes</title>
+<link href="{% static 'css\olya.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery-3.1.0.min.js' %}"> </script>
+<script src="{% static 'js/jqueryCycle.js' %}"> </script>
+<script type="text/javascript">
+$(document).ready(function() {
+        $('.barra').cycle({
+        fx: 'fade', 
+         
+ });
+        }); 
+</script> 
+</head>
+
+<body>
+
+<div class="conteiner">
+ 
+ <div class="logo">
+<img src="{% static 'images/lenta.jpg' %}"/>
+ </div 
+ 
+><nav class="NavHome">
+ <ul>
+          
+          <li> <a href="{% url 'index' %}">all cakes </a> </li>
+          <li> <a href="{% url 'about us' %}">about us </a> </li>
+
+          <li> <a href="{% url 'contacts' %}">contact us </a> </li>
+  </ul>
+ </nav>
+
+<div class="barra">
+ <img src="{% static 'images/slider-image1.jpg' %}" width="940"   height="350"/>
+ <img src="{% static 'images/slider-image2.jpg' %}" width="940"   height="350"/>
+ <img src="{% static 'images/slider-image3.jpg' %}" width="940"   height="350"/>
+</div> 
+<div class="pie" >
+<p> Olya style cakes Copyright &copy; 2021 <p>
+</div>
+</div>
+
+
+</body>
+</html>
