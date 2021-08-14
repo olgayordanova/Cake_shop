@@ -5,6 +5,9 @@ body {
     margin: 0;
     padding: 0;
 }
+/*body {background-color: transparent;*/
+/*background-image: url("/static/images/46.png");*/
+/*background-repeat: repeat;}*/
 
 a {
     text-decoration: none;
